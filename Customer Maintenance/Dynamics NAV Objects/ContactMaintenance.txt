@@ -1,0 +1,272 @@
+OBJECT Codeunit 50000 Customer Maintenance
+{
+  OBJECT-PROPERTIES
+  {
+    Date=22.06.18;
+    Time=14.59.49;
+    Modified=Yes;
+    Version List=CM;
+  }
+  PROPERTIES
+  {
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+
+    [External]
+    PROCEDURE GetContact@1000000000(HashCode@1000000001 : Text;VAR ReadContact@1000000000 : XMLport 50001);
+    BEGIN
+      SetGlobalLanguage();
+
+      ReadContact.SetContactNumber(HashCode); // TODO: HashCode must be converted to Contact No
+      ReadContact.EXPORT();
+    END;
+
+    [External]
+    PROCEDURE UpdateContact@1000000001(UpdateContact@1000000000 : XMLport 50000);
+    BEGIN
+      SetGlobalLanguage();
+
+      UpdateContact.IMPORT();
+    END;
+
+    LOCAL PROCEDURE SetGlobalLanguage@1101251784();
+    VAR
+      LanguageL@1101251785 : Record 8;
+    BEGIN
+      IF LanguageL.GET(1044) THEN // Always Norwegian
+        IF LanguageL."Windows Language ID" <> GLOBALLANGUAGE THEN
+          GLOBALLANGUAGE(LanguageL."Windows Language ID");
+    END;
+
+    BEGIN
+    END.
+  }
+}
+
+OBJECT XMLport 50000 Update Contact
+{
+  OBJECT-PROPERTIES
+  {
+    Date=22.06.18;
+    Time=15.31.25;
+    Modified=Yes;
+    Version List=CM;
+  }
+  PROPERTIES
+  {
+    UseDefaultNamespace=Yes;
+    OnPostXMLport=BEGIN
+                    UpdateContactRecord();
+                  END;
+
+  }
+  ELEMENTS
+  {
+    { [{DB0282BC-532C-4243-B1A7-05C16B29A1DC}];  ;UpdateContact       ;Element ;Text    ;
+                                                  MaxOccurs=Once;
+                                                  Export::OnPreXMLItem=2 }
+
+    { [{8D6D5832-8AB0-4978-92C9-FA0E044466F8}];1 ;ContactNo           ;Element ;Text    ;
+                                                  DataType=Code;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{51F571CE-DF97-4A8C-9243-AA14738531F1}];1 ;FirstName           ;Element ;Text    ;
+                                                  DataType=Text;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{D86B7950-B262-43B7-BB7F-6443CE67F1AF}];1 ;MiddleName          ;Element ;Text    ;
+                                                  DataType=Text;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{81321409-F792-4790-9C34-1FF88BEB0C07}];1 ;LastName            ;Element ;Text    ;
+                                                  DataType=Text;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{2C9F7E0D-1BDB-4583-8FAD-C10BF4202F5F}];1 ;Address             ;Element ;Text    ;
+                                                  DataType=Text;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{CF94CCCE-9395-4132-837C-532850A3F3D5}];1 ;Address2            ;Element ;Text    ;
+                                                  DataType=Text;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{70F65CED-5B0F-4545-A4FC-0CACB4B72710}];1 ;PostCode            ;Element ;Text    ;
+                                                  DataType=Code;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{CEFFF898-1A21-4D21-B460-D42E5EDEEC35}];1 ;City                ;Element ;Text    ;
+                                                  DataType=Text;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{439EDB70-EF33-4933-AE9F-4217D8FEF4F1}];1 ;PhoneNo             ;Element ;Text    ;
+                                                  DataType=Text;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{BE7C0FA4-59F8-45C1-9A7A-C8EFD8127BF8}];1 ;Email               ;Element ;Text    ;
+                                                  DataType=Text;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+  }
+  EVENTS
+  {
+  }
+  REQUESTPAGE
+  {
+    PROPERTIES
+    {
+    }
+    CONTROLS
+    {
+    }
+  }
+  CODE
+  {
+
+    LOCAL PROCEDURE UpdateContactRecord@1000000003();
+    VAR
+      ContactL@1000000000 : Record 5050;
+    BEGIN
+      ContactL.GET(ContactNo);
+      ContactL.VALIDATE("First Name", FirstName);
+      ContactL.VALIDATE("Middle Name", MiddleName);
+      ContactL.VALIDATE(Surname, LastName);
+      ContactL.Address := Address;
+      ContactL."Address 2" := Address2;
+      ContactL.VALIDATE("Post Code", PostCode);
+      ContactL.VALIDATE(City, City);
+      ContactL."Phone No." := PhoneNo;
+      ContactL.VALIDATE("E-Mail", Email);
+      ContactL.MODIFY(TRUE);
+    END;
+
+    BEGIN
+    END.
+  }
+}
+
+OBJECT XMLport 50001 Read Contact
+{
+  OBJECT-PROPERTIES
+  {
+    Date=22.06.18;
+    Time=15.17.47;
+    Modified=Yes;
+    Version List=CM;
+  }
+  PROPERTIES
+  {
+    UseDefaultNamespace=Yes;
+  }
+  ELEMENTS
+  {
+    { [{DB0282BC-532C-4243-B1A7-05C16B29A1DC}];  ;ReadContact         ;Element ;Table   ;
+                                                  SourceTable=Table5050;
+                                                  MaxOccurs=Once;
+                                                  Export::OnPreXMLItem=BEGIN
+                                                                         Contact.SETRANGE("No.", ContactNoG);
+                                                                       END;
+                                                                        }
+
+    { [{8D6D5832-8AB0-4978-92C9-FA0E044466F8}];1 ;ContactNo           ;Element ;Field   ;
+                                                  DataType=Code;
+                                                  SourceField=Contact::No.;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{51F571CE-DF97-4A8C-9243-AA14738531F1}];1 ;FirstName           ;Element ;Field   ;
+                                                  DataType=Text;
+                                                  SourceField=Contact::First Name;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{D86B7950-B262-43B7-BB7F-6443CE67F1AF}];1 ;MiddleName          ;Element ;Field   ;
+                                                  DataType=Text;
+                                                  SourceField=Contact::Middle Name;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{81321409-F792-4790-9C34-1FF88BEB0C07}];1 ;LastName            ;Element ;Field   ;
+                                                  DataType=Text;
+                                                  SourceField=Contact::Surname;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{2C9F7E0D-1BDB-4583-8FAD-C10BF4202F5F}];1 ;Address             ;Element ;Field   ;
+                                                  DataType=Text;
+                                                  SourceField=Contact::Address;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{CF94CCCE-9395-4132-837C-532850A3F3D5}];1 ;Address2            ;Element ;Field   ;
+                                                  DataType=Text;
+                                                  SourceField=Contact::Address 2;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{70F65CED-5B0F-4545-A4FC-0CACB4B72710}];1 ;PostCode            ;Element ;Field   ;
+                                                  DataType=Code;
+                                                  SourceField=Contact::Post Code;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{CEFFF898-1A21-4D21-B460-D42E5EDEEC35}];1 ;City                ;Element ;Field   ;
+                                                  DataType=Text;
+                                                  SourceField=Contact::City;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{439EDB70-EF33-4933-AE9F-4217D8FEF4F1}];1 ;PhoneNo             ;Element ;Field   ;
+                                                  DataType=Text;
+                                                  SourceField=Contact::Phone No.;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+    { [{BE7C0FA4-59F8-45C1-9A7A-C8EFD8127BF8}];1 ;Email               ;Element ;Field   ;
+                                                  DataType=Text;
+                                                  SourceField=Contact::E-Mail;
+                                                  MinOccurs=Once;
+                                                  MaxOccurs=Once }
+
+  }
+  EVENTS
+  {
+  }
+  REQUESTPAGE
+  {
+    PROPERTIES
+    {
+    }
+    CONTROLS
+    {
+    }
+  }
+  CODE
+  {
+    VAR
+      ContactNoG@1000000000 : Code[20];
+
+    [External]
+    PROCEDURE SetContactNumber@1000000000(ContactNoP@1000000000 : Code[20]);
+    BEGIN
+      ContactNoG := ContactNoP;
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

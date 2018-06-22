@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/Customer" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Customer" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50001" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50001" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="ReadContact">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="ContactNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="FirstName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="MiddleName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="LastName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Address" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Address2" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PostCode" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="City" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PhoneNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Email" type="string" />
+        </sequence>
+      </complexType>
+      <element name="ReadContact" type="tns:ReadContact" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50000" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50000" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="UpdateContact" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="ContactNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="FirstName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="MiddleName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="LastName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Address" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Address2" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PostCode" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="City" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PhoneNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Email" type="string" />
+        </sequence>
+      </complexType>
+      <element name="UpdateContact" type="tns:UpdateContact" />
+    </schema>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Customer" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="GetContact">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="hashCode" type="string" />
+            <element xmlns:q1="urn:microsoft-dynamics-nav/xmlports/x50001" minOccurs="1" maxOccurs="1" name="readContact" type="q1:ReadContact" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetContact_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q2="urn:microsoft-dynamics-nav/xmlports/x50001" minOccurs="1" maxOccurs="1" name="readContact" type="q2:ReadContact" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateContact">
+        <complexType>
+          <sequence>
+            <element xmlns:q3="urn:microsoft-dynamics-nav/xmlports/x50000" minOccurs="1" maxOccurs="1" name="updateContact" type="q3:UpdateContact" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateContact_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="GetContact">
+    <part name="parameters" element="tns:GetContact" />
+  </message>
+  <message name="GetContact_Result">
+    <part name="parameters" element="tns:GetContact_Result" />
+  </message>
+  <message name="UpdateContact">
+    <part name="parameters" element="tns:UpdateContact" />
+  </message>
+  <message name="UpdateContact_Result">
+    <part name="parameters" element="tns:UpdateContact_Result" />
+  </message>
+  <portType name="Customer_Port">
+    <operation name="GetContact">
+      <input name="GetContact" message="tns:GetContact" />
+      <output name="GetContact_Result" message="tns:GetContact_Result" />
+    </operation>
+    <operation name="UpdateContact">
+      <input name="UpdateContact" message="tns:UpdateContact" />
+      <output name="UpdateContact_Result" message="tns:UpdateContact_Result" />
+    </operation>
+  </portType>
+  <binding name="Customer_Binding" type="tns:Customer_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="GetContact">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Customer:GetContact" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetContact">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetContact_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdateContact">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Customer:UpdateContact" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateContact">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateContact_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Customer">
+    <port name="Customer_Port" binding="tns:Customer_Binding">
+      <address location="http://desktop-pflikce:7047/DynamicsNAV110/WS/CRONUS%20Norge%20AS/Codeunit/Customer" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>
