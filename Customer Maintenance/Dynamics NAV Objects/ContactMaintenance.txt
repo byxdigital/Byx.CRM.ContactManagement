@@ -1,4 +1,4 @@
-OBJECT Codeunit 50000 Customer Maintenance
+OBJECT Codeunit 74004 Customer Master Web Service
 {
   OBJECT-PROPERTIES
   {
@@ -15,9 +15,8 @@ OBJECT Codeunit 50000 Customer Maintenance
   }
   CODE
   {
-
-    [External]
-    PROCEDURE GetContact@1000000000(HashCode@1000000001 : Text;VAR ReadContact@1000000000 : XMLport 50001);
+    
+    PROCEDURE GetContact@1000000000(HashCode@1000000001 : Text;VAR ReadContact@1000000000 : XMLport 74001);
     BEGIN
       SetGlobalLanguage();
 
@@ -25,8 +24,7 @@ OBJECT Codeunit 50000 Customer Maintenance
       ReadContact.EXPORT();
     END;
 
-    [External]
-    PROCEDURE UpdateContact@1000000001(UpdateContact@1000000000 : XMLport 50000);
+    PROCEDURE UpdateContact@1000000001(UpdateContact@1000000000 : XMLport 74000);
     BEGIN
       SetGlobalLanguage();
 
@@ -47,7 +45,7 @@ OBJECT Codeunit 50000 Customer Maintenance
   }
 }
 
-OBJECT XMLport 50000 Update Contact
+OBJECT XMLport 74000 Update Contact
 {
   OBJECT-PROPERTIES
   {
@@ -68,7 +66,7 @@ OBJECT XMLport 50000 Update Contact
   {
     { [{DB0282BC-532C-4243-B1A7-05C16B29A1DC}];  ;UpdateContact       ;Element ;Text    ;
                                                   MaxOccurs=Once;
-                                                  Export::OnPreXMLItem=2 }
+                                                   }
 
     { [{8D6D5832-8AB0-4978-92C9-FA0E044466F8}];1 ;ContactNo           ;Element ;Text    ;
                                                   DataType=Code;
@@ -158,7 +156,7 @@ OBJECT XMLport 50000 Update Contact
   }
 }
 
-OBJECT XMLport 50001 Read Contact
+OBJECT XMLport 74001 Read Contact
 {
   OBJECT-PROPERTIES
   {
@@ -258,8 +256,7 @@ OBJECT XMLport 50001 Read Contact
   {
     VAR
       ContactNoG@1000000000 : Code[20];
-
-    [External]
+    
     PROCEDURE SetContactNumber@1000000000(ContactNoP@1000000000 : Code[20]);
     BEGIN
       ContactNoG := ContactNoP;
