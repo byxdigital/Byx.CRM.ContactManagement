@@ -15,8 +15,9 @@ namespace CustomerMaintenance.WebServices
         protected BasicHttpBinding GetBindingTransportCredentialOnly()
         {
             var binding = new BasicHttpBinding();
-            binding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
-            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
+            //binding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
+            binding.Security.Mode = BasicHttpSecurityMode.Transport;
+            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
 
             return binding;
         }

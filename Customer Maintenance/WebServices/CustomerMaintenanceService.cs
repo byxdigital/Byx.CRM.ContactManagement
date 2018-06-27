@@ -43,8 +43,10 @@ namespace CustomerMaintenance.WebServices
         private Customer_PortClient CustomerServicePortClient(BasicHttpBinding navWSBinding, string baseURL)
         {
             Customer_PortClient servicePortClient = new Customer_PortClient(navWSBinding, new EndpointAddress(baseURL));
-            servicePortClient.ClientCredentials.Windows.ClientCredential = GetNetworkCredentials();
-            servicePortClient.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Delegation;
+            //servicePortClient.ClientCredentials.Windows.ClientCredential = GetNetworkCredentials();
+            //servicePortClient.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Delegation;
+            servicePortClient.ClientCredentials.UserName.UserName = _userSettings.UserAccount;
+            servicePortClient.ClientCredentials.UserName.Password = _userSettings.Password;
 
             return servicePortClient;
         }
