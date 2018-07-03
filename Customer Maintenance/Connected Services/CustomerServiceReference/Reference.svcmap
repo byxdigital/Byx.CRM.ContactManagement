@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://desktop-pflikce:7047/DynamicsNAV110/WS/CRONUS%20Norge%20AS/Codeunit/Customer" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://nav.bjorklund.no:7057/WebServices/WS/Butikkmaster/Codeunit/ContactService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Customer.wsdl" MetadataType="Wsdl" ID="15a5913f-be71-450c-b218-867fc55c71d5" SourceId="1" SourceUrl="http://desktop-pflikce:7047/DynamicsNAV110/WS/CRONUS Norge AS/Codeunit/Customer" />
+    <MetadataFile FileName="ContactService.wsdl" MetadataType="Wsdl" ID="91225c6e-81f3-416a-8ad4-a78a642cb694" SourceId="1" SourceUrl="https://nav.bjorklund.no:7057/WebServices/WS/Butikkmaster/Codeunit/ContactService" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

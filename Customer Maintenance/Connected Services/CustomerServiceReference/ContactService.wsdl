@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/Customer" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Customer" xmlns="http://schemas.xmlsoap.org/wsdl/">
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/ContactService" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/ContactService" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
-    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50001" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50001" xmlns="http://www.w3.org/2001/XMLSchema">
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x74001" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x74001" xmlns="http://www.w3.org/2001/XMLSchema">
       <complexType name="ReadContact">
         <sequence>
           <element minOccurs="1" maxOccurs="1" name="ContactNo" type="string" />
@@ -18,7 +18,7 @@
       </complexType>
       <element name="ReadContact" type="tns:ReadContact" />
     </schema>
-    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50000" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50000" xmlns="http://www.w3.org/2001/XMLSchema">
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x74000" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x74000" xmlns="http://www.w3.org/2001/XMLSchema">
       <complexType name="UpdateContact" mixed="true">
         <sequence>
           <element minOccurs="1" maxOccurs="1" name="ContactNo" type="string" />
@@ -35,26 +35,26 @@
       </complexType>
       <element name="UpdateContact" type="tns:UpdateContact" />
     </schema>
-    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Customer" xmlns="http://www.w3.org/2001/XMLSchema">
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/ContactService" xmlns="http://www.w3.org/2001/XMLSchema">
       <element name="GetContact">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="hashCode" type="string" />
-            <element xmlns:q1="urn:microsoft-dynamics-nav/xmlports/x50001" minOccurs="1" maxOccurs="1" name="readContact" type="q1:ReadContact" />
+            <element xmlns:q1="urn:microsoft-dynamics-nav/xmlports/x74001" minOccurs="1" maxOccurs="1" name="readContact" type="q1:ReadContact" />
           </sequence>
         </complexType>
       </element>
       <element name="GetContact_Result">
         <complexType>
           <sequence>
-            <element xmlns:q2="urn:microsoft-dynamics-nav/xmlports/x50001" minOccurs="1" maxOccurs="1" name="readContact" type="q2:ReadContact" />
+            <element xmlns:q2="urn:microsoft-dynamics-nav/xmlports/x74001" minOccurs="1" maxOccurs="1" name="readContact" type="q2:ReadContact" />
           </sequence>
         </complexType>
       </element>
       <element name="UpdateContact">
         <complexType>
           <sequence>
-            <element xmlns:q3="urn:microsoft-dynamics-nav/xmlports/x50000" minOccurs="1" maxOccurs="1" name="updateContact" type="q3:UpdateContact" />
+            <element xmlns:q3="urn:microsoft-dynamics-nav/xmlports/x74000" minOccurs="1" maxOccurs="1" name="updateContact" type="q3:UpdateContact" />
           </sequence>
         </complexType>
       </element>
@@ -77,7 +77,7 @@
   <message name="UpdateContact_Result">
     <part name="parameters" element="tns:UpdateContact_Result" />
   </message>
-  <portType name="Customer_Port">
+  <portType name="ContactService_Port">
     <operation name="GetContact">
       <input name="GetContact" message="tns:GetContact" />
       <output name="GetContact_Result" message="tns:GetContact_Result" />
@@ -87,10 +87,10 @@
       <output name="UpdateContact_Result" message="tns:UpdateContact_Result" />
     </operation>
   </portType>
-  <binding name="Customer_Binding" type="tns:Customer_Port">
+  <binding name="ContactService_Binding" type="tns:ContactService_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     <operation name="GetContact">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Customer:GetContact" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/ContactService:GetContact" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetContact">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -99,7 +99,7 @@
       </output>
     </operation>
     <operation name="UpdateContact">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Customer:UpdateContact" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/ContactService:UpdateContact" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="UpdateContact">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
@@ -108,9 +108,9 @@
       </output>
     </operation>
   </binding>
-  <service name="Customer">
-    <port name="Customer_Port" binding="tns:Customer_Binding">
-      <address location="http://desktop-pflikce:7047/DynamicsNAV110/WS/CRONUS%20Norge%20AS/Codeunit/Customer" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+  <service name="ContactService">
+    <port name="ContactService_Port" binding="tns:ContactService_Binding">
+      <address location="https://nav.bjorklund.no:7057/WebServices/WS/Butikkmaster/Codeunit/ContactService" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>

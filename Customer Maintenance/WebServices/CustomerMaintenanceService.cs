@@ -40,9 +40,9 @@ namespace CustomerMaintenance.WebServices
         }
 
 
-        private Customer_PortClient CustomerServicePortClient(BasicHttpBinding navWSBinding, string baseURL)
+        private ContactService_PortClient CustomerServicePortClient(BasicHttpBinding navWSBinding, string baseURL)
         {
-            Customer_PortClient servicePortClient = new Customer_PortClient(navWSBinding, new EndpointAddress(baseURL));
+            ContactService_PortClient servicePortClient = new ContactService_PortClient(navWSBinding, new EndpointAddress(baseURL));
             //servicePortClient.ClientCredentials.Windows.ClientCredential = GetNetworkCredentials();
             //servicePortClient.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Delegation;
             servicePortClient.ClientCredentials.UserName.UserName = _userSettings.UserAccount;

@@ -12,32 +12,32 @@ namespace CustomerMaintenance.CustomerServiceReference {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/Customer", ConfigurationName="CustomerServiceReference.Customer_Port")]
-    public interface Customer_Port {
+    [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/ContactService", ConfigurationName="CustomerServiceReference.ContactService_Port")]
+    public interface ContactService_Port {
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/Customer:GetContact", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/ContactService:GetContact", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         CustomerMaintenance.CustomerServiceReference.GetContact_Result GetContact(CustomerMaintenance.CustomerServiceReference.GetContact request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/Customer:GetContact", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/ContactService:GetContact", ReplyAction="*")]
         System.Threading.Tasks.Task<CustomerMaintenance.CustomerServiceReference.GetContact_Result> GetContactAsync(CustomerMaintenance.CustomerServiceReference.GetContact request);
         
         // CODEGEN: Generating message contract since the wrapper name (UpdateContact_Result) of message UpdateContact_Result does not match the default value (UpdateContact)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/Customer:UpdateContact", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/ContactService:UpdateContact", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         CustomerMaintenance.CustomerServiceReference.UpdateContact_Result UpdateContact(CustomerMaintenance.CustomerServiceReference.UpdateContact1 request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/Customer:UpdateContact", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/ContactService:UpdateContact", ReplyAction="*")]
         System.Threading.Tasks.Task<CustomerMaintenance.CustomerServiceReference.UpdateContact_Result> UpdateContactAsync(CustomerMaintenance.CustomerServiceReference.UpdateContact1 request);
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50001")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x74001")]
     public partial class ReadContact : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string contactNoField;
@@ -191,11 +191,11 @@ namespace CustomerMaintenance.CustomerServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50000")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x74000")]
     public partial class UpdateContact : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string contactNoField;
@@ -364,13 +364,13 @@ namespace CustomerMaintenance.CustomerServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetContact", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/Customer", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetContact", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/ContactService", IsWrapped=true)]
     public partial class GetContact {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/Customer", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/ContactService", Order=0)]
         public string hashCode;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/Customer", Order=1)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/ContactService", Order=1)]
         public CustomerMaintenance.CustomerServiceReference.ReadContact readContact;
         
         public GetContact() {
@@ -384,10 +384,10 @@ namespace CustomerMaintenance.CustomerServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetContact_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/Customer", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetContact_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/ContactService", IsWrapped=true)]
     public partial class GetContact_Result {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/Customer", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/ContactService", Order=0)]
         public CustomerMaintenance.CustomerServiceReference.ReadContact readContact;
         
         public GetContact_Result() {
@@ -401,10 +401,10 @@ namespace CustomerMaintenance.CustomerServiceReference {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateContact", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/Customer", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateContact", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/ContactService", IsWrapped=true)]
     public partial class UpdateContact1 {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/Customer", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/ContactService", Order=0)]
         public CustomerMaintenance.CustomerServiceReference.UpdateContact updateContact;
         
         public UpdateContact1() {
@@ -418,7 +418,7 @@ namespace CustomerMaintenance.CustomerServiceReference {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateContact_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/Customer", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateContact_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/ContactService", IsWrapped=true)]
     public partial class UpdateContact_Result {
         
         public UpdateContact_Result() {
@@ -426,34 +426,34 @@ namespace CustomerMaintenance.CustomerServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface Customer_PortChannel : CustomerMaintenance.CustomerServiceReference.Customer_Port, System.ServiceModel.IClientChannel {
+    public interface ContactService_PortChannel : CustomerMaintenance.CustomerServiceReference.ContactService_Port, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class Customer_PortClient : System.ServiceModel.ClientBase<CustomerMaintenance.CustomerServiceReference.Customer_Port>, CustomerMaintenance.CustomerServiceReference.Customer_Port {
+    public partial class ContactService_PortClient : System.ServiceModel.ClientBase<CustomerMaintenance.CustomerServiceReference.ContactService_Port>, CustomerMaintenance.CustomerServiceReference.ContactService_Port {
         
-        public Customer_PortClient() {
+        public ContactService_PortClient() {
         }
         
-        public Customer_PortClient(string endpointConfigurationName) : 
+        public ContactService_PortClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public Customer_PortClient(string endpointConfigurationName, string remoteAddress) : 
+        public ContactService_PortClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public Customer_PortClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ContactService_PortClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public Customer_PortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ContactService_PortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CustomerMaintenance.CustomerServiceReference.GetContact_Result CustomerMaintenance.CustomerServiceReference.Customer_Port.GetContact(CustomerMaintenance.CustomerServiceReference.GetContact request) {
+        CustomerMaintenance.CustomerServiceReference.GetContact_Result CustomerMaintenance.CustomerServiceReference.ContactService_Port.GetContact(CustomerMaintenance.CustomerServiceReference.GetContact request) {
             return base.Channel.GetContact(request);
         }
         
@@ -461,7 +461,7 @@ namespace CustomerMaintenance.CustomerServiceReference {
             CustomerMaintenance.CustomerServiceReference.GetContact inValue = new CustomerMaintenance.CustomerServiceReference.GetContact();
             inValue.hashCode = hashCode;
             inValue.readContact = readContact;
-            CustomerMaintenance.CustomerServiceReference.GetContact_Result retVal = ((CustomerMaintenance.CustomerServiceReference.Customer_Port)(this)).GetContact(inValue);
+            CustomerMaintenance.CustomerServiceReference.GetContact_Result retVal = ((CustomerMaintenance.CustomerServiceReference.ContactService_Port)(this)).GetContact(inValue);
             readContact = retVal.readContact;
         }
         
@@ -470,25 +470,25 @@ namespace CustomerMaintenance.CustomerServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CustomerMaintenance.CustomerServiceReference.UpdateContact_Result CustomerMaintenance.CustomerServiceReference.Customer_Port.UpdateContact(CustomerMaintenance.CustomerServiceReference.UpdateContact1 request) {
+        CustomerMaintenance.CustomerServiceReference.UpdateContact_Result CustomerMaintenance.CustomerServiceReference.ContactService_Port.UpdateContact(CustomerMaintenance.CustomerServiceReference.UpdateContact1 request) {
             return base.Channel.UpdateContact(request);
         }
         
         public void UpdateContact(CustomerMaintenance.CustomerServiceReference.UpdateContact updateContact1) {
             CustomerMaintenance.CustomerServiceReference.UpdateContact1 inValue = new CustomerMaintenance.CustomerServiceReference.UpdateContact1();
             inValue.updateContact = updateContact1;
-            CustomerMaintenance.CustomerServiceReference.UpdateContact_Result retVal = ((CustomerMaintenance.CustomerServiceReference.Customer_Port)(this)).UpdateContact(inValue);
+            CustomerMaintenance.CustomerServiceReference.UpdateContact_Result retVal = ((CustomerMaintenance.CustomerServiceReference.ContactService_Port)(this)).UpdateContact(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CustomerMaintenance.CustomerServiceReference.UpdateContact_Result> CustomerMaintenance.CustomerServiceReference.Customer_Port.UpdateContactAsync(CustomerMaintenance.CustomerServiceReference.UpdateContact1 request) {
+        System.Threading.Tasks.Task<CustomerMaintenance.CustomerServiceReference.UpdateContact_Result> CustomerMaintenance.CustomerServiceReference.ContactService_Port.UpdateContactAsync(CustomerMaintenance.CustomerServiceReference.UpdateContact1 request) {
             return base.Channel.UpdateContactAsync(request);
         }
         
         public System.Threading.Tasks.Task<CustomerMaintenance.CustomerServiceReference.UpdateContact_Result> UpdateContactAsync(CustomerMaintenance.CustomerServiceReference.UpdateContact updateContact) {
             CustomerMaintenance.CustomerServiceReference.UpdateContact1 inValue = new CustomerMaintenance.CustomerServiceReference.UpdateContact1();
             inValue.updateContact = updateContact;
-            return ((CustomerMaintenance.CustomerServiceReference.Customer_Port)(this)).UpdateContactAsync(inValue);
+            return ((CustomerMaintenance.CustomerServiceReference.ContactService_Port)(this)).UpdateContactAsync(inValue);
         }
     }
 }
