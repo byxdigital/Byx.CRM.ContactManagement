@@ -15,11 +15,7 @@ namespace CustomerMaintenance.Models
         [Required]
         [StringLength(30, ErrorMessage = "Felt må være minst 2 karakterer og ikke mer enn 30.", MinimumLength = 2)]
         [Display(Name = "Fornavn")]
-        public string FirstName { get; set; }
-
-        [StringLength(30, ErrorMessage = "Felt må være minst 2 karakterer og ikke mer enn 30.", MinimumLength = 2)]
-        [Display(Name = "Mellomnavn")]
-        public string MiddleName { get; set; }
+        public string FirstName { get; set; }       
 
         [Required]
         [StringLength(30, ErrorMessage = "Felt må være minst 2 karakterer og ikke mer enn 30.", MinimumLength = 2)]
@@ -29,10 +25,6 @@ namespace CustomerMaintenance.Models
         [StringLength(50, ErrorMessage = "Felt må være minst 2 karakterer og ikke mer enn 50.", MinimumLength = 2)]
         [Display(Name = "Adresse")]
         public string Address { get; set; }
-
-        [StringLength(50, ErrorMessage = "Felt må være minst 2 karakterer og ikke mer enn 50.", MinimumLength = 2)]
-        [Display(Name = "Adresse 2")]
-        public string Address2 { get; set; }
 
         [StringLength(20, ErrorMessage = "Felt må være minst 4 karakterer og ikke mer enn 20.", MinimumLength = 2)]
         [Display(Name = "Postnr.")]
@@ -57,10 +49,8 @@ namespace CustomerMaintenance.Models
             {
                 ContactNo = contact.ContactNo,
                 FirstName = contact.FirstName,
-                MiddleName = contact.MiddleName,
                 LastName = contact.LastName,
-                Address = contact.Address,
-                Address2 = contact.Address2,
+                Address = contact.Address,                
                 PostCode = contact.PostCode,
                 City = contact.City,
                 PhoneNo = contact.PhoneNo,
@@ -73,11 +63,9 @@ namespace CustomerMaintenance.Models
             return new UpdateContact()
             {
                 ContactNo = model.ContactNo,
-                FirstName = string.IsNullOrEmpty(model.FirstName) ? string.Empty : model.FirstName,
-                MiddleName = string.IsNullOrEmpty(model.MiddleName) ? string.Empty : model.MiddleName,
+                FirstName = string.IsNullOrEmpty(model.FirstName) ? string.Empty : model.FirstName,                
                 LastName = string.IsNullOrEmpty(model.LastName) ? string.Empty : model.LastName,
-                Address = string.IsNullOrEmpty(model.Address) ? string.Empty : model.Address,
-                Address2 = string.IsNullOrEmpty(model.Address2) ? string.Empty : model.Address2,
+                Address = string.IsNullOrEmpty(model.Address) ? string.Empty : model.Address,                
                 PostCode = string.IsNullOrEmpty(model.PostCode) ? string.Empty : model.PostCode,
                 City = string.IsNullOrEmpty(model.City) ? string.Empty : model.City,
                 PhoneNo = string.IsNullOrEmpty(model.PhoneNo) ? string.Empty : model.PhoneNo,

@@ -44,13 +44,9 @@ namespace CustomerMaintenance.CustomerServiceReference {
         
         private string firstNameField;
         
-        private string middleNameField;
-        
         private string lastNameField;
         
         private string addressField;
-        
-        private string address2Field;
         
         private string postCodeField;
         
@@ -86,18 +82,6 @@ namespace CustomerMaintenance.CustomerServiceReference {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string MiddleName {
-            get {
-                return this.middleNameField;
-            }
-            set {
-                this.middleNameField = value;
-                this.RaisePropertyChanged("MiddleName");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
         public string LastName {
             get {
                 return this.lastNameField;
@@ -109,7 +93,7 @@ namespace CustomerMaintenance.CustomerServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
         public string Address {
             get {
                 return this.addressField;
@@ -121,19 +105,7 @@ namespace CustomerMaintenance.CustomerServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string Address2 {
-            get {
-                return this.address2Field;
-            }
-            set {
-                this.address2Field = value;
-                this.RaisePropertyChanged("Address2");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
         public string PostCode {
             get {
                 return this.postCodeField;
@@ -145,7 +117,7 @@ namespace CustomerMaintenance.CustomerServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
         public string City {
             get {
                 return this.cityField;
@@ -157,7 +129,7 @@ namespace CustomerMaintenance.CustomerServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
         public string PhoneNo {
             get {
                 return this.phoneNoField;
@@ -169,7 +141,7 @@ namespace CustomerMaintenance.CustomerServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
         public string Email {
             get {
                 return this.emailField;
@@ -202,13 +174,9 @@ namespace CustomerMaintenance.CustomerServiceReference {
         
         private string firstNameField;
         
-        private string middleNameField;
-        
         private string lastNameField;
         
         private string addressField;
-        
-        private string address2Field;
         
         private string postCodeField;
         
@@ -246,18 +214,6 @@ namespace CustomerMaintenance.CustomerServiceReference {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string MiddleName {
-            get {
-                return this.middleNameField;
-            }
-            set {
-                this.middleNameField = value;
-                this.RaisePropertyChanged("MiddleName");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
         public string LastName {
             get {
                 return this.lastNameField;
@@ -269,7 +225,7 @@ namespace CustomerMaintenance.CustomerServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
         public string Address {
             get {
                 return this.addressField;
@@ -281,19 +237,7 @@ namespace CustomerMaintenance.CustomerServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string Address2 {
-            get {
-                return this.address2Field;
-            }
-            set {
-                this.address2Field = value;
-                this.RaisePropertyChanged("Address2");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
         public string PostCode {
             get {
                 return this.postCodeField;
@@ -305,7 +249,7 @@ namespace CustomerMaintenance.CustomerServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
         public string City {
             get {
                 return this.cityField;
@@ -317,7 +261,7 @@ namespace CustomerMaintenance.CustomerServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
         public string PhoneNo {
             get {
                 return this.phoneNoField;
@@ -329,7 +273,7 @@ namespace CustomerMaintenance.CustomerServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
         public string Email {
             get {
                 return this.emailField;

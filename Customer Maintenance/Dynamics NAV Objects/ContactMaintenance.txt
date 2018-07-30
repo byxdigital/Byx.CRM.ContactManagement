@@ -2,8 +2,8 @@ OBJECT Codeunit 74004 Customer Master Web Service
 {
   OBJECT-PROPERTIES
   {
-    Date=22.06.18;
-    Time=14.59.49;
+    Date=03.07.18;
+    Time=15:51:19;
     Modified=Yes;
     Version List=CM;
   }
@@ -15,12 +15,12 @@ OBJECT Codeunit 74004 Customer Master Web Service
   }
   CODE
   {
-    
-    PROCEDURE GetContact@1000000000(HashCode@1000000001 : Text;VAR ReadContact@1000000000 : XMLport 74001);
+
+    PROCEDURE GetContact@1000000000(hashCode@1000000001 : Text;VAR ReadContact@1000000000 : XMLport 74001);
     BEGIN
       SetGlobalLanguage();
 
-      ReadContact.SetContactNumber(HashCode); // TODO: HashCode must be converted to Contact No
+      ReadContact.SetContactNumber(hashCode); // TODO: HashCode must be converted to Contact No
       ReadContact.EXPORT();
     END;
 
@@ -49,8 +49,8 @@ OBJECT XMLport 74000 Update Contact
 {
   OBJECT-PROPERTIES
   {
-    Date=22.06.18;
-    Time=15.31.25;
+    Date=04.07.18;
+    Time=12:24:34;
     Modified=Yes;
     Version List=CM;
   }
@@ -65,8 +65,7 @@ OBJECT XMLport 74000 Update Contact
   ELEMENTS
   {
     { [{DB0282BC-532C-4243-B1A7-05C16B29A1DC}];  ;UpdateContact       ;Element ;Text    ;
-                                                  MaxOccurs=Once;
-                                                   }
+                                                  MaxOccurs=Once }
 
     { [{8D6D5832-8AB0-4978-92C9-FA0E044466F8}];1 ;ContactNo           ;Element ;Text    ;
                                                   DataType=Code;
@@ -78,22 +77,12 @@ OBJECT XMLport 74000 Update Contact
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
-    { [{D86B7950-B262-43B7-BB7F-6443CE67F1AF}];1 ;MiddleName          ;Element ;Text    ;
-                                                  DataType=Text;
-                                                  MinOccurs=Once;
-                                                  MaxOccurs=Once }
-
     { [{81321409-F792-4790-9C34-1FF88BEB0C07}];1 ;LastName            ;Element ;Text    ;
                                                   DataType=Text;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{2C9F7E0D-1BDB-4583-8FAD-C10BF4202F5F}];1 ;Address             ;Element ;Text    ;
-                                                  DataType=Text;
-                                                  MinOccurs=Once;
-                                                  MaxOccurs=Once }
-
-    { [{CF94CCCE-9395-4132-837C-532850A3F3D5}];1 ;Address2            ;Element ;Text    ;
                                                   DataType=Text;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
@@ -136,18 +125,18 @@ OBJECT XMLport 74000 Update Contact
 
     LOCAL PROCEDURE UpdateContactRecord@1000000003();
     VAR
-      ContactL@1000000000 : Record 5050;
+      ContactL@1000000000 : Record 74000;
     BEGIN
-      ContactL.GET(ContactNo);
+      ContactL.SETRANGE("Url Safe Key", ContactNo);
+      IF ContactL.COUNT <> 1 THEN EXIT; //Failsafe to not update duplicates should the uniqueID not be unique after all
+      ContactL.FINDFIRST;
       ContactL.VALIDATE("First Name", FirstName);
-      ContactL.VALIDATE("Middle Name", MiddleName);
-      ContactL.VALIDATE(Surname, LastName);
+      ContactL.VALIDATE("Last Name", LastName);
       ContactL.Address := Address;
-      ContactL."Address 2" := Address2;
-      ContactL.VALIDATE("Post Code", PostCode);
+      ContactL.VALIDATE("Postal Code", PostCode);
       ContactL.VALIDATE(City, City);
-      ContactL."Phone No." := PhoneNo;
-      ContactL.VALIDATE("E-Mail", Email);
+      ContactL."Cell Phone" := PhoneNo;
+      ContactL.VALIDATE("E-mail", Email);
       ContactL.MODIFY(TRUE);
     END;
 
@@ -160,8 +149,8 @@ OBJECT XMLport 74001 Read Contact
 {
   OBJECT-PROPERTIES
   {
-    Date=22.06.18;
-    Time=15.17.47;
+    Date=04.07.18;
+    Time=10:54:20;
     Modified=Yes;
     Version List=CM;
   }
@@ -172,70 +161,58 @@ OBJECT XMLport 74001 Read Contact
   ELEMENTS
   {
     { [{DB0282BC-532C-4243-B1A7-05C16B29A1DC}];  ;ReadContact         ;Element ;Table   ;
-                                                  SourceTable=Table5050;
+                                                  SourceTable=Table74000;
                                                   MaxOccurs=Once;
                                                   Export::OnPreXMLItem=BEGIN
-                                                                         Contact.SETRANGE("No.", ContactNoG);
+                                                                         "Oculos Contact".SETRANGE("Url Safe Key", ContactNoG);
                                                                        END;
                                                                         }
 
     { [{8D6D5832-8AB0-4978-92C9-FA0E044466F8}];1 ;ContactNo           ;Element ;Field   ;
-                                                  DataType=Code;
-                                                  SourceField=Contact::No.;
+                                                  DataType=Text;
+                                                  SourceField=Oculos Contact::Url Safe Key;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{51F571CE-DF97-4A8C-9243-AA14738531F1}];1 ;FirstName           ;Element ;Field   ;
                                                   DataType=Text;
-                                                  SourceField=Contact::First Name;
-                                                  MinOccurs=Once;
-                                                  MaxOccurs=Once }
-
-    { [{D86B7950-B262-43B7-BB7F-6443CE67F1AF}];1 ;MiddleName          ;Element ;Field   ;
-                                                  DataType=Text;
-                                                  SourceField=Contact::Middle Name;
+                                                  SourceField=Oculos Contact::First Name;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{81321409-F792-4790-9C34-1FF88BEB0C07}];1 ;LastName            ;Element ;Field   ;
                                                   DataType=Text;
-                                                  SourceField=Contact::Surname;
+                                                  SourceField=Oculos Contact::Last Name;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{2C9F7E0D-1BDB-4583-8FAD-C10BF4202F5F}];1 ;Address             ;Element ;Field   ;
                                                   DataType=Text;
-                                                  SourceField=Contact::Address;
-                                                  MinOccurs=Once;
-                                                  MaxOccurs=Once }
-
-    { [{CF94CCCE-9395-4132-837C-532850A3F3D5}];1 ;Address2            ;Element ;Field   ;
-                                                  DataType=Text;
-                                                  SourceField=Contact::Address 2;
+                                                  SourceField=Oculos Contact::Address;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{70F65CED-5B0F-4545-A4FC-0CACB4B72710}];1 ;PostCode            ;Element ;Field   ;
                                                   DataType=Code;
-                                                  SourceField=Contact::Post Code;
+                                                  SourceField=Oculos Contact::Postal Code;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{CEFFF898-1A21-4D21-B460-D42E5EDEEC35}];1 ;City                ;Element ;Field   ;
                                                   DataType=Text;
-                                                  SourceField=Contact::City;
+                                                  SourceField=Oculos Contact::City;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{439EDB70-EF33-4933-AE9F-4217D8FEF4F1}];1 ;PhoneNo             ;Element ;Field   ;
                                                   DataType=Text;
-                                                  SourceField=Contact::Phone No.;
+                                                  SourceField=Oculos Contact::Cell Phone;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{BE7C0FA4-59F8-45C1-9A7A-C8EFD8127BF8}];1 ;Email               ;Element ;Field   ;
                                                   DataType=Text;
-                                                  SourceField=Contact::E-Mail;
+                                                  SourceField=Oculos Contact::E-mail;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
@@ -256,7 +233,7 @@ OBJECT XMLport 74001 Read Contact
   {
     VAR
       ContactNoG@1000000000 : Code[20];
-    
+
     PROCEDURE SetContactNumber@1000000000(ContactNoP@1000000000 : Code[20]);
     BEGIN
       ContactNoG := ContactNoP;
