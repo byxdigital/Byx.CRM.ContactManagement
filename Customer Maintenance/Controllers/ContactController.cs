@@ -30,15 +30,15 @@ namespace Customer_Maintenance.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Update(string hashCode)
+        public ActionResult Update(string id)
         {
-            if(string.IsNullOrEmpty(hashCode))
+            if(string.IsNullOrEmpty(id))
                 return RedirectToAction("Index", "Contact");
 
             CustomerService service = new CustomerService(_settings);
             ReadContact contact = new ReadContact();
 
-            service.GetContact(hashCode, ref contact);
+            service.GetContact(id, ref contact);
 
             return View(ContactViewModel.ServiceModelToViewModel(contact));
         }
