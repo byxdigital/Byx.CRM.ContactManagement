@@ -2,10 +2,10 @@ OBJECT Codeunit 74004 Customer Master Web Service
 {
   OBJECT-PROPERTIES
   {
-    Date=03.07.18;
-    Time=15:51:19;
+    Date=22.08.18;
+    Time=08:14:08;
     Modified=Yes;
-    Version List=CM;
+    Version List=MASTER1.0;
   }
   PROPERTIES
   {
@@ -45,14 +45,14 @@ OBJECT Codeunit 74004 Customer Master Web Service
   }
 }
 
-OBJECT XMLport 74000 Update Contact
+OBJECT XMLport 74000 Customer Master Update
 {
   OBJECT-PROPERTIES
   {
-    Date=04.07.18;
-    Time=12:24:34;
+    Date=22.08.18;
+    Time=13:35:36;
     Modified=Yes;
-    Version List=CM;
+    Version List=MASTER1.0;
   }
   PROPERTIES
   {
@@ -126,18 +126,57 @@ OBJECT XMLport 74000 Update Contact
     LOCAL PROCEDURE UpdateContactRecord@1000000003();
     VAR
       ContactL@1000000000 : Record 74000;
+      CustomerMasterSetup@1000000002 : Record 74010;
+      CustomerMasterMgt@1000000001 : Codeunit 74000;
+      ValidatedEmailAddress@1000000003 : Text;
+      ValidatedPhoneNo@1000000004 : Text;
     BEGIN
+      CustomerMasterSetup.GET;
+      CustomerMasterSetup.TESTFIELD("Data Source Code Profile Reg.");
+
       ContactL.SETRANGE("Url Safe Key", ContactNo);
       IF ContactL.COUNT <> 1 THEN EXIT; //Failsafe to not update duplicates should the uniqueID not be unique after all
       ContactL.FINDFIRST;
-      ContactL.VALIDATE("First Name", FirstName);
-      ContactL.VALIDATE("Last Name", LastName);
-      ContactL.Address := Address;
-      ContactL.VALIDATE("Postal Code", PostCode);
-      ContactL.VALIDATE(City, City);
-      ContactL."Cell Phone" := PhoneNo;
-      ContactL.VALIDATE("E-mail", Email);
-      ContactL.MODIFY(TRUE);
+
+      ValidatedEmailAddress := CustomerMasterMgt.ValidatedEmailAddress(Email);
+      IF ValidatedEmailAddress = '' THEN
+        ValidatedEmailAddress := Email;
+
+      ValidatedPhoneNo := CustomerMasterMgt.ValidatedNorwegianMobilePhoneNo(PhoneNo,FALSE);
+      IF ValidatedPhoneNo = '' THEN
+        ValidatedPhoneNo := PhoneNo;
+
+      CustomerMasterMgt.UpdateDataSource(
+        CustomerMasterSetup."Data Source Code Profile Reg.",   // DataSourceCode
+        ContactNo,                                             // DataSourceCodeKey1
+        '',                                                    // DataSourceCodeKey2
+        ContactL."Customer No.",                               // MasterCustomerNo
+        FirstName,                                             // FirstName
+        LastName,                                              // Surname
+        Address,                                               // Address
+        '',                                                    // Address2
+        PostCode,                                              // PostCode
+        City,                                                  // City
+        0,                                                     // Sex
+        0D,                                                    // BirthDate
+        '',                                                    // GroupCode
+        ValidatedEmailAddress,                                 // Email
+        FALSE,                                                 // OptInEmail
+        ValidatedPhoneNo,                                      // MobilePhoneNo
+        FALSE,                                                 // OptInSMS
+        '',                                                    // CreatedByDepartmentCode
+        '',                                                    // CreatedBy
+        CURRENTDATETIME,                                       // LatestChangeDateTime
+        CURRENTDATETIME,                                       // NameChangedDateTime
+        CURRENTDATETIME,                                       // AddressChangedDateTime
+        0DT,                                                   // SexChangedDateTime
+        0DT,                                                   // BirthDateChangedDateTime
+        0DT,                                                   // GroupCodeChangedDateTime
+        CURRENTDATETIME,                                       // EmailChangedDateTime
+        0DT,                                                   // OptInEmailChangedDateTime
+        CURRENTDATETIME,                                       // MobilePhoneNoChangedDateTime
+        0DT,                                                   // OptInSMSChangedDateTime
+        TRUE)                                                  // UpdateMasterOnInsert
     END;
 
     BEGIN
@@ -145,14 +184,14 @@ OBJECT XMLport 74000 Update Contact
   }
 }
 
-OBJECT XMLport 74001 Read Contact
+OBJECT XMLport 74001 Customer Master Read
 {
   OBJECT-PROPERTIES
   {
-    Date=04.07.18;
-    Time=10:54:20;
+    Date=28.07.18;
+    Time=09:20:33;
     Modified=Yes;
-    Version List=CM;
+    Version List=MASTER1.0;
   }
   PROPERTIES
   {
@@ -164,55 +203,55 @@ OBJECT XMLport 74001 Read Contact
                                                   SourceTable=Table74000;
                                                   MaxOccurs=Once;
                                                   Export::OnPreXMLItem=BEGIN
-                                                                         "Oculos Contact".SETRANGE("Url Safe Key", ContactNoG);
+                                                                         "Customer Master".SETRANGE("Url Safe Key", ContactNoG);
                                                                        END;
                                                                         }
 
     { [{8D6D5832-8AB0-4978-92C9-FA0E044466F8}];1 ;ContactNo           ;Element ;Field   ;
                                                   DataType=Text;
-                                                  SourceField=Oculos Contact::Url Safe Key;
+                                                  SourceField=Customer Master::Url Safe Key;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{51F571CE-DF97-4A8C-9243-AA14738531F1}];1 ;FirstName           ;Element ;Field   ;
                                                   DataType=Text;
-                                                  SourceField=Oculos Contact::First Name;
+                                                  SourceField=Customer Master::First Name;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{81321409-F792-4790-9C34-1FF88BEB0C07}];1 ;LastName            ;Element ;Field   ;
                                                   DataType=Text;
-                                                  SourceField=Oculos Contact::Last Name;
+                                                  SourceField=Customer Master::Last Name;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{2C9F7E0D-1BDB-4583-8FAD-C10BF4202F5F}];1 ;Address             ;Element ;Field   ;
                                                   DataType=Text;
-                                                  SourceField=Oculos Contact::Address;
+                                                  SourceField=Customer Master::Address;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{70F65CED-5B0F-4545-A4FC-0CACB4B72710}];1 ;PostCode            ;Element ;Field   ;
                                                   DataType=Code;
-                                                  SourceField=Oculos Contact::Postal Code;
+                                                  SourceField=Customer Master::Postal Code;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{CEFFF898-1A21-4D21-B460-D42E5EDEEC35}];1 ;City                ;Element ;Field   ;
                                                   DataType=Text;
-                                                  SourceField=Oculos Contact::City;
+                                                  SourceField=Customer Master::City;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{439EDB70-EF33-4933-AE9F-4217D8FEF4F1}];1 ;PhoneNo             ;Element ;Field   ;
                                                   DataType=Text;
-                                                  SourceField=Oculos Contact::Cell Phone;
+                                                  SourceField=Customer Master::Cell Phone;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
     { [{BE7C0FA4-59F8-45C1-9A7A-C8EFD8127BF8}];1 ;Email               ;Element ;Field   ;
                                                   DataType=Text;
-                                                  SourceField=Oculos Contact::E-mail;
+                                                  SourceField=Customer Master::E-mail;
                                                   MinOccurs=Once;
                                                   MaxOccurs=Once }
 
