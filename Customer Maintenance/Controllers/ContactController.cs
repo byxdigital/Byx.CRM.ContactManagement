@@ -59,7 +59,7 @@ namespace Customer_Maintenance.Controllers
                     service.UpdateContact(contact);
                 }
 
-                return RedirectToAction("Index", "Contact");
+                return View("Thanks");
             }
             catch(Exception ex)
             {
